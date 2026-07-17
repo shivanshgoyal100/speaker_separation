@@ -1,4 +1,4 @@
-# Voice Project — MossFormer2 (2-speaker) + TSE (any speaker count)
+# Speaker Separation Project — MossFormer2 (2-speaker) + TSE (any speaker count)
 
 ## What this is
 Two separation models, routed by pyannote diarization:
@@ -127,18 +127,3 @@ Output `.wav` files land in `separation_output/`.
 
 ---
 
-## Honest scoping — what's verified vs. not
-- **TSE model.py**: shape-verified by you directly (you ran it locally,
-  got "Shape check passed.", 6.5M params) — confirmed working.
-- **MossFormer2 smoke test**: not yet confirmed passing on your end as of
-  this delivery — the numpy/pyannote conflict was blocking it, now
-  resolved by the two-stage split. Run it and confirm the `[2, 2, T]`
-  shape before training.
-- **stage_a_diarize.py / stage_b_separate.py**: not run in my sandbox
-  (no torch/pyannote/clearvoice/network access here) — please run
-  Stage A first (lighter, faster to fail) and confirm `segments.json`
-  looks right before moving to Stage B.
-- **speechbrain's own numpy requirements**: not verified against
-  clearvoice's `<2.0` pin. If Stage B's install prints a version-conflict
-  warning specifically naming speechbrain, stop and share it — that's a
-  different problem from the pyannote one and would need its own fix.
